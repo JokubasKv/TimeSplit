@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         _inputActions = new InputSystem_Actions();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerLook = GetComponent<PlayerLook>();
