@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerMovement _playerMovement;
     private PlayerLook _playerLook;
+    private PlayerInteract _playerInteract;
+    private PlayerHold _playerHold;
 
     void Awake()
     {
@@ -15,12 +17,19 @@ public class InputManager : MonoBehaviour
         _inputActions = new InputSystem_Actions();
         _playerMovement = GetComponent<PlayerMovement>();
         _playerLook = GetComponent<PlayerLook>();
+        _playerInteract = GetComponent<PlayerInteract>();
+        _playerHold = GetComponent<PlayerHold>();
 
         playerActions = _inputActions.Player;
 
         playerActions.Jump.performed += ctx => _playerMovement.Jump();
         playerActions.Crouch.performed += ctx => _playerMovement.Crouch();
         playerActions.Sprint.performed += ctx => _playerMovement.Sprint();
+        playerActions.Interact.performed += ctx => _playerInteract.Interact();
+        playerActions.Throw.performed += ctx => _playerHold.ThrowObject();
+
+        playerActions.Attack.started += ctx => _playerHold.AttackPressed();
+        playerActions.Attack.canceled += ctx => _playerHold.AttackReleased();
     }
 
     private void Update()

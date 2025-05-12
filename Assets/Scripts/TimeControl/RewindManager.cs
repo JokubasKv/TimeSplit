@@ -1,17 +1,44 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public enum OutOfBoundsBehaviour
+{
+    Disable,
+    DisableDestroy
+}
 
 public class RewindManager : MonoSingleton<RewindManager>
 {
+    public static readonly float secondsToTrack = 6;
+    public float secondsAvailableForRewind;
+    public bool IsBeingRewinded { get; private set; } = false;
+    public bool TrackingEnabled { get; set; } = true;
+
+
+    float rewindSeconds = 0;
+    List<RewindAbstract> _rewindedObjects;
+    List<(RewindAbstract obj, OutOfBoundsBehaviour outOfBoundsBehaviour)> _lateAddedRewindedObjects = new List<(RewindAbstract obj, OutOfBoundsBehaviour outOfBoundsBehaviour)>();
+
+
     [SerializeField] public static Action<float> RewindTimeCall;
     [SerializeField] public static Action<bool> TrackingStateCall;
     [SerializeField] public static Action<float> RestoreBuffers;
 
-    float rewindSeconds = 0;
+    public void AddObjectForTracking(RewindAbstract objectToRewind, OutOfBoundsBehaviour outOfBoundsBehaviour)
+    {
+        if (!_lateAddedRewindedObjects.Any(x => x.Item1 == objectToRewind))
+        {
+            objectToRewind.MainInit();
+            _lateAddedRewindedObjects.Add(new(objectToRewind, outOfBoundsBehaviour));
+        }
+    }
 
-    public static readonly float secondsToTrack = 6;
-    public float secondsAvailableForRewind;
-    public bool IsBeingRewinded = false;
+    private void OnEnable()
+    {
+        secondsAvailableForRewind = 0;
+    }
 
     public void StartRewindTimeBySeconds(float seconds)
     {
@@ -44,17 +71,12 @@ public class RewindManager : MonoSingleton<RewindManager>
             return;
         }
     }
-    private void OnEnable()
-    {
-        secondsAvailableForRewind = 0;
-    }
 
     private void FixedUpdate()
     {
-
         if (IsBeingRewinded)
         {
-            UIManager.instance.SetTimeBar(secondsAvailableForRewind - rewindSeconds / (float)secondsAvailableForRewind);
+            UIManager.instance.SetTimeBar((secondsAvailableForRewind - rewindSeconds) / (float)secondsToTrack);
             RewindTimeCall?.Invoke(rewindSeconds);
         }
         else if (secondsAvailableForRewind != secondsToTrack)
@@ -69,6 +91,9 @@ public class RewindManager : MonoSingleton<RewindManager>
 
     protected override void InternalInit()
     {
+        _rewindedObjects = FindObjectsByType<RewindAbstract>(FindObjectsSortMode.None).ToList();
+
+        _rewindedObjects.ForEach(x => x.MainInit());
     }
 
     protected override void InternalOnDestroy()

@@ -1,30 +1,41 @@
+using UnityEditor.Rendering.LookDev;
+using UnityEditor.Rendering;
 using UnityEngine;
+using static UnityEngine.EventSystems.StandaloneInputModule;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem.XR;
+
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
 
-    public static float baseSpeed = 5f;
-    public static float sprintSpeed = 8f;
-    public static float gravity = -9.8f;
-    public static float jumpHeight = 3f;
-
-    private float _speed = baseSpeed;
-
+    private float _speed;
     private bool _crouching = false;
     private bool _lerpCroucing = false;
     private float _crouchTimer = 0f;
-
-
     private bool _sprinting = false;
+
+    [Header("Move Settings")]
+    public float baseSpeed = 5f;
+    public float sprintSpeed = 8f;
+    public float crouchSpeed = 8f;
+    public float gravity = -9.81f;                   // gravity / fall rate
+    public float jumpHeight = 2.5f;                  // jump height
+
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        _speed = baseSpeed;
     }
 
     void Update()
     {
+        //Debug.Log(controller.isGrounded);
         ProcessCrouch();
     }
 
@@ -34,19 +45,23 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(transform.TransformDirection(moveDirection) * _speed * Time.deltaTime);
 
         playerVelocity.y += gravity * Time.deltaTime;
-        if (controller.isGrounded && playerVelocity.y < 0)
+        if (controller.isGrounded && playerVelocity.y < -0.05f)
         {
-            playerVelocity.y = 0;
+            playerVelocity.y = -0.05f;
         }
-        controller.Move(playerVelocity * Time.deltaTime);
+
+        controller.Move(playerVelocity);
     }
 
     public void Jump()
     {
-        if (controller.isGrounded)
+        Debug.Log("Jump");
+        Debug.Log(playerVelocity.y);
+        if (controller.isGrounded && playerVelocity.y <= 0)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
+            playerVelocity.y = jumpHeight * Time.deltaTime;
         }
+        Debug.Log(playerVelocity.y);
     }
 
     public void ProcessCrouch()
@@ -54,9 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (_lerpCroucing)
         {
             _crouchTimer += Time.deltaTime;
-            Debug.Log(_crouchTimer + " crouch");
             float p = _crouchTimer / 1;
-            Debug.Log(p + " p");
             p *= p;
             if (_crouching)
             {
@@ -78,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch()
     {
         _crouching = !_crouching;
+        _speed = _crouching ? crouchSpeed : baseSpeed;
         _crouchTimer = 0;
         _lerpCroucing = true;
     }

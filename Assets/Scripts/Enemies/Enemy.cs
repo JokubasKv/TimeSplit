@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private StateMachine _stateMachine;
+    protected StateMachine _stateMachine;
     private NavMeshAgent _agent;
     private GameObject _player;
     [SerializeField]
@@ -24,26 +26,39 @@ public class Enemy : MonoBehaviour
     public Transform gunBarrel;
     public float fireRate = 1f;
 
+    [Header("Health")]
+    public float maxHealth = 10f;
+    public float health;
+
     [SerializeField]
     private string _currentState;
 
+    private Renderer _renderer;
+    private Color _originalColor;
+    [SerializeField]
+    private Color _damageFlashColor = Color.red;
+    [SerializeField]
+    private float _flashDuration = 0.2f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _stateMachine = GetComponent<StateMachine>();
         _agent = GetComponent<NavMeshAgent>();
-        _stateMachine.Initialize();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _renderer = GetComponentInChildren<Renderer>();
+
+        if (_renderer != null)
+        {
+            _originalColor = _renderer.material.color;
+        }
+        health = maxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CanSeePlayer();
         _currentState = _stateMachine.activeState.ToString();
-    }
 
+    }
 
     public bool CanSeePlayer()
     {
@@ -70,5 +85,32 @@ public class Enemy : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if (_renderer != null)
+        {
+            StartCoroutine(FlashDamage());
+        }
+
+        if (health <= 0)
+        {
+            DestroyEnemy();
+        }
+    }
+
+    private IEnumerator FlashDamage()
+    {
+        _renderer.material.color = _damageFlashColor;
+        yield return new WaitForSeconds(_flashDuration);
+        _renderer.material.color = _originalColor;
+    }
+
+    private void DestroyEnemy()
+    {
+        gameObject.SetActive(false);
     }
 }

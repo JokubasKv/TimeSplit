@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TestInteractable : Interactable
+public class TestInteractable : AbstractInteractable
 {
 
 }

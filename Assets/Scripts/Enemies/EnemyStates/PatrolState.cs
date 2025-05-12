@@ -8,7 +8,19 @@ public class PatrolState : BaseState
 
     public override void Enter()
     {
-        enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+        if (enemy.path == null || enemy.path.waypoints == null || enemy.path.waypoints.Count == 0)
+        {
+            Vector3 randomDirection = enemy.transform.position + new Vector3(
+                Random.Range(-10f, 10f),
+                0,
+                Random.Range(-10f, 10f)
+            );
+            enemy.Agent.SetDestination(randomDirection);
+        }
+        else
+        {
+            enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+        }
     }
 
     public override void Exit()
@@ -29,18 +41,32 @@ public class PatrolState : BaseState
     {
         if (enemy.Agent.remainingDistance < 0.2f)
         {
+
             _waitTimer += Time.deltaTime;
             if (_waitTimer > waypointWaitTime)
             {
-                if (waypointIndex < enemy.path.waypoints.Count - 1)
+                if (enemy.path == null || enemy.path.waypoints == null || enemy.path.waypoints.Count == 0)
                 {
-                    waypointIndex++;
+                    Vector3 randomDirection = enemy.transform.position + new Vector3(
+                        Random.Range(-10f, 10f),
+                        0,
+                        Random.Range(-10f, 10f)
+                    );
+                    enemy.Agent.SetDestination(randomDirection);
                 }
                 else
                 {
-                    waypointIndex = 0;
+                    if (waypointIndex < enemy.path.waypoints.Count - 1)
+                    {
+                        waypointIndex++;
+                    }
+                    else
+                    {
+                        waypointIndex = 0;
+                    }
+                    enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+
                 }
-                enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
                 _waitTimer = 0;
             }
         }

@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    private RewindAbstract _rewindAbstract;
+    private RewindManager _rewindManager;
+
     public BaseState activeState;
 
-    public void Initialize()
+    public void Initialize(BaseState intializeState)
     {
-        ChangeState(new PatrolState());
+        _rewindManager = RewindManager.instance;
+        _rewindAbstract = GetComponent<RewindAbstract>();
+
+        ChangeState(intializeState);
     }
 
     void Update()
     {
-        if (activeState != null)
+        if (activeState != null
+            && (_rewindAbstract == null || !_rewindManager.IsBeingRewinded))
         {
             activeState.Perform();
         }

@@ -67,10 +67,12 @@ public class PressToRewind : MonoBehaviour
     void TurnBackTimePressed()
     {
         rewindPressed = true;
+        UIManager.instance.TimeRewindStarted();
     }
 
     void TurnBackTimeReleased()
     {
         rewindPressed = false;
+        UIManager.instance.TimeRewindStopped();
     }
 }

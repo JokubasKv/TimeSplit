@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AttackState : BaseState
 {
-    //Timers
     private float _moveTimer;
     private float _loosePlayerTimer;
     private float _shotTimer;
@@ -50,7 +49,14 @@ public class AttackState : BaseState
             _loosePlayerTimer += Time.deltaTime;
             if (_loosePlayerTimer > 3)
             {
-                stateMachine.ChangeState(new SearchState());
+                if (enemy is StationaryEnemy)
+                {
+                    stateMachine.ChangeState(new StationaryState());
+                }
+                else
+                {
+                    stateMachine.ChangeState(new SearchState());
+                }
             }
         }
     }

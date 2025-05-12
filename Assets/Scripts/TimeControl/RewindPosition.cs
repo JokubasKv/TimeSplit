@@ -2,21 +2,25 @@ using UnityEngine;
 
 public class RewindPosition : RewindAbstract
 {
-    [SerializeField] bool trackTransform;
+    [SerializeField] bool trackActiveState;
 
     public override void Rewind(float seconds)
     {
-        if (trackTransform)
+        RestoreTransform(seconds);
+
+        if (trackActiveState)
         {
-            RestoreTransform(seconds);
+            RestoreObjectActiveState(seconds);
         }
     }
 
     public override void Track()
     {
-        if (trackTransform)
+        TrackTransform();
+
+        if (trackActiveState)
         {
-            TrackTransform();
+            TrackObjectActiveState();
         }
     }
 

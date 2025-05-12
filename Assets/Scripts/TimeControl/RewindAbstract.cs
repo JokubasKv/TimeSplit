@@ -73,7 +73,7 @@ public abstract class RewindAbstract : MonoBehaviour
         valuesToWrite.rotation = transform.rotation;
         valuesToWrite.scale = transform.localScale;
         trackedTransformValues.WriteLastValue(valuesToWrite);
-        Debug.Log(valuesToWrite.ToString());
+        //Debug.Log(valuesToWrite.ToString());
     }
 
     protected void RestoreTransform(float seconds)
