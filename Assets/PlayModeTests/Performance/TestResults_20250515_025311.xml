@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2025-05-14 23:51:45Z" end-time="2025-05-14 23:51:50Z" duration="4,4220438">
+  <test-suite type="TestSuite" id="1062" name="TimeSplit" fullname="TimeSplit" runstate="Runnable" testcasecount="46" result="Passed" start-time="2025-05-14 23:51:45Z" end-time="2025-05-14 23:51:50Z" duration="4.422044" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1058" name="PlayModeTests.dll" fullname="C:/Users/ITWORK/Desktop/Unity/TimeSplit/Library/ScriptAssemblies/PlayModeTests.dll" runstate="Runnable" testcasecount="46" result="Passed" start-time="2025-05-14 23:51:45Z" end-time="2025-05-14 23:51:50Z" duration="4.413160" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="31432" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1010" name="RewindPositionPerformanceTest" fullname="RewindPositionPerformanceTest" classname="RewindPositionPerformanceTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-05-14 23:51:45Z" end-time="2025-05-14 23:51:50Z" duration="4.408198" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1011" name="Rewind_ManyObjects_Performance" fullname="RewindPositionPerformanceTest.Rewind_ManyObjects_Performance" methodname="Rewind_ManyObjects_Performance" classname="RewindPositionPerformanceTest" runstate="Runnable" seed="642948602" result="Passed" start-time="2025-05-14 23:51:45Z" end-time="2025-05-14 23:51:50Z" duration="4.395304" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="Category" value="Performance" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Time.GC() in Undefineds
+Min:		0,00 
+Median:		5,50 
+Max:		34,00 
+Avg:		9,40 
+StdDev:		9,54 
+SampleCount:	10
+Sum:		94,00 
+First samples:	▁▂▂▃▅▂█▂▂▂
+(not enough samples for histogram)
+
+Time in Milliseconds
+Min:		0,05 ms
+Median:		0,07 ms
+Max:		0,10 ms
+Avg:		0,07 ms
+StdDev:		0,01 ms
+SampleCount:	10
+Sum:		0,70 ms
+First samples:	▁▅▄▂▃▄▆▁█▂
+(not enough samples for histogram)
+
+
+##performancetestresult2:{"Name":"RewindPositionPerformanceTest.Rewind_ManyObjects_Performance","ClassName":"RewindPositionPerformanceTest","MethodName":"Rewind_ManyObjects_Performance","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"Time.GC()","Unit":8,"IncreaseIsBetter":false,"Samples":[0.0,6.0,5.0,11.0,19.0,6.0,34.0,5.0,3.0,5.0],"Min":0.0,"Max":34.0,"Median":5.5,"Average":9.4,"StandardDeviation":9.54148835350125,"Sum":94.0},{"Name":"Time","Unit":2,"IncreaseIsBetter":false,"Samples":[0.05389999999999873,0.080600000000004,0.07059999999995626,0.06169999999997344,0.06499999999994088,0.07360000000005584,0.08609999999998763,0.05420000000003711,0.09560000000010405,0.06150000000002365],"Min":0.05389999999999873,"Max":0.09560000000010405,"Median":0.06779999999994857,"Average":0.07028000000000816,"StandardDeviation":0.013093723687342787,"Sum":0.7028000000000816}]}
+##performancetestruninfo2:{"TestSuite":"Playmode","Date":1747266701683,"Player":{"Development":true,"ScreenWidth":1920,"ScreenHeight":1080,"ScreenRefreshRate":60,"Fullscreen":false,"Vsync":0,"AntiAliasing":0,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Linear","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows 11  (10.0.26100) 64bit","DeviceModel":"MS-7D98 (Micro-Star International Co., Ltd.)","DeviceName":"DESKTOP-CL5CE7J","ProcessorType":"13th Gen Intel(R) Core(TM) i7-13700KF","ProcessorCount":24,"GraphicsDeviceName":"NVIDIA GeForce RTX 4070","SystemMemorySizeMB":32606},"Editor":{"Version":"6000.0.39f1","Branch":"6000.0/staging","Changeset":"15ea7ed0b100","Date":1739241500},"Dependencies":["com.unity.2d.sprite@1.0.0","com.unity.ai.navigation@2.0.6","com.unity.collab-proxy@2.7.1","com.unity.feature.worldbuilding@1.0.1","com.unity.ide.rider@3.0.31","com.unity.ide.visualstudio@2.0.23","com.unity.inputsystem@1.13.0","com.unity.multiplayer.center@1.0.0","com.unity.postprocessing@3.4.0","com.unity.render-pipelines.universal@17.0.3","com.unity.shadergraph@17.0.3","com.unity.test-framework@1.4.6","com.unity.test-framework.performance@3.1.0","com.unity.timeline@1.8.7","com.unity.ugui@2.0.0","com.unity.visualscripting@1.9.6","com.unity.modules.accessibility@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.hierarchycore@1.0.0","com.unity.ext.nunit@2.0.5","com.unity.render-pipelines.core@17.0.3","com.unity.searcher@4.9.3","com.unity.render-pipelines.universal-config@17.0.3","com.unity.probuilder@6.0.5","com.unity.polybrush@1.1.8","com.unity.formats.fbx@5.1.3","com.unity.terrain-tools@5.1.2","com.unity.burst@1.8.19","com.unity.mathematics@1.3.2","com.unity.collections@2.5.1","com.unity.rendering.light-transport@1.0.1","com.autodesk.fbx@5.1.1","com.unity.settings-manager@2.0.1","com.unity.nuget.mono-cecil@1.11.4"],"Results":[]}
+Saving results to: C:/Users/ITWORK/AppData/LocalLow/DefaultCompany/TimeSplit\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

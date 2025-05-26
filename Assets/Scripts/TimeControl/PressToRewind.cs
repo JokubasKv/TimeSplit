@@ -5,13 +5,12 @@ public class PressToRewind : MonoBehaviour
 {
     bool isRewinding = false;
     bool rewindPressed = false;
-    [SerializeField] float rewindIntensity = 0.02f;          //Variable to change rewind speed
-    [SerializeField] RewindManager rewindManager;
+    [SerializeField] float rewindIntensity = 0.02f;
+    [SerializeField] RewindController rewindController;
     [SerializeField] float rewindValue = 0;
 
     InputSystem_Actions inputActions;
 
-    #region -Awake/OnEnable/OnDisable -
     private void OnEnable()
     {
         inputActions.Player.Rewind.started += e => TurnBackTimePressed();
@@ -30,25 +29,24 @@ public class PressToRewind : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-        rewindManager = FindFirstObjectByType<RewindManager>();
+        rewindController = FindFirstObjectByType<RewindController>();
     }
-    #endregion
 
 
     void FixedUpdate()
     {
-        if (rewindPressed)                     //Change keycode for your own custom key if you want
+        if (rewindPressed)
         {
-            rewindValue += rewindIntensity;                 //While holding the button, we will gradually rewind more and more time into the past
+            rewindValue += rewindIntensity;
 
             if (!isRewinding)
             {
-                rewindManager.StartRewindTimeBySeconds(rewindValue);
+                rewindController.StartRewindTimeBySeconds(rewindValue);
             }
             else
             {
-                if (rewindManager.secondsAvailableForRewind > rewindValue)      //Safety check so it is not grabbing values out of the bounds
-                    rewindManager.SetTimeSecondsInRewind(rewindValue);
+                if (rewindController.secondsAvailableForRewind > rewindValue)
+                    rewindController.SetTimeSecondsInRewind(rewindValue);
             }
             isRewinding = true;
         }
@@ -56,23 +54,31 @@ public class PressToRewind : MonoBehaviour
         {
             if (isRewinding)
             {
-                rewindManager.StopRewindTimeBySeconds();
-                //rewindSound.Stop();
+                rewindController.StopRewindTimeBySeconds();
                 rewindValue = 0;
                 isRewinding = false;
             }
         }
     }
 
-    void TurnBackTimePressed()
+    public void TurnBackTimePressed()
     {
         rewindPressed = true;
-        UIManager.instance.TimeRewindStarted();
+
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.TimeRewindStarted();
+        }
+
     }
 
-    void TurnBackTimeReleased()
+    public void TurnBackTimeReleased()
     {
         rewindPressed = false;
-        UIManager.instance.TimeRewindStopped();
+
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.TimeRewindStopped();
+        }
     }
 }

@@ -118,6 +118,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dcbc1e6be570a994aac4db41437a990d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 90468624960923914}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dcbc1e6be570a994aac4db41437a990d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4635202093988401758}
   m_SourcePrefab: {fileID: 100100000, guid: dcbc1e6be570a994aac4db41437a990d, type: 3}
 --- !u!4 &7097032602218823833 stripped
 Transform:
@@ -145,7 +148,7 @@ MonoBehaviour:
   isPickedUp: 0
   isThrown: 0
   staticPickupRotation: 1
-  pickupRotation: {x: 0, y: 0, z: 0}
+  pickupRotation: {x: 1, y: 0, z: 0}
   throwDamage: 2
   fadesWhenPickedUp: 0
 --- !u!114 &431645666781479423
@@ -214,3 +217,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8402185, y: 15.50583, z: 38.14202}
   m_Center: {x: -0.15444416, y: -2.19381, z: 3.8119626}
+--- !u!114 &4635202093988401758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581362610297035299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53004ce1032c5714791846dc44dd4115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackActiveState: 0

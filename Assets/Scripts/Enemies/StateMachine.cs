@@ -3,13 +3,13 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     private RewindAbstract _rewindAbstract;
-    private RewindManager _rewindManager;
+    private RewindController _rewindManager;
 
     public BaseState activeState;
 
     public void Initialize(BaseState intializeState)
     {
-        _rewindManager = RewindManager.instance;
+        _rewindManager = RewindController.instance;
         _rewindAbstract = GetComponent<RewindAbstract>();
 
         ChangeState(intializeState);

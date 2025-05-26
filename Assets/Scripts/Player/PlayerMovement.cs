@@ -1,9 +1,4 @@
-using UnityEditor.Rendering.LookDev;
-using UnityEditor.Rendering;
 using UnityEngine;
-using static UnityEngine.EventSystems.StandaloneInputModule;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -21,10 +16,18 @@ public class PlayerMovement : MonoBehaviour
     public float baseSpeed = 5f;
     public float sprintSpeed = 8f;
     public float crouchSpeed = 8f;
-    public float gravity = -9.81f;                   // gravity / fall rate
-    public float jumpHeight = 2.5f;                  // jump height
+    public float gravity = -9.81f;
+    public float jumpHeight = 2.5f;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
 
+    private bool _isDashing = false;
+    private float _dashTimer = 0f;
+    private float _dashCooldownTimer = 0f;
+    private Vector3 _dashDirection;
 
     void Start()
     {
@@ -35,8 +38,52 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(controller.isGrounded);
         ProcessCrouch();
+        ProcessDash();
+    }
+
+    public void Dash(Vector2 input)
+    {
+        if (_isDashing || _dashCooldownTimer > 0f)
+        {
+            return;
+        }
+
+        _isDashing = true;
+        _dashTimer = dashDuration;
+        _dashCooldownTimer = dashCooldown;
+
+        Vector3 moveDir = new Vector3(input.x, 0, input.y);
+
+        if (moveDir.sqrMagnitude < 0.01f)
+        {
+            moveDir = Vector3.forward;
+        }
+
+        _dashDirection = transform.TransformDirection(moveDir.normalized);
+    }
+
+    private void ProcessDash()
+    {
+        if (_dashCooldownTimer > 0f)
+        {
+            _dashCooldownTimer = Mathf.Max(0, _dashCooldownTimer - Time.deltaTime);
+        }
+
+        if (_isDashing)
+        {
+            controller.Move(_dashDirection * dashSpeed * Time.deltaTime);
+            _dashTimer -= Time.deltaTime;
+            if (_dashTimer <= 0f)
+            {
+                _isDashing = false;
+            }
+        }
+
+        if (UIManager.instance)
+        {
+            UIManager.instance.SetDashBar(1 - (_dashCooldownTimer / dashCooldown));
+        }
     }
 
     public void ProcesMove(Vector2 input)
@@ -55,13 +102,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("Jump");
-        Debug.Log(playerVelocity.y);
         if (controller.isGrounded && playerVelocity.y <= 0)
         {
             playerVelocity.y = jumpHeight * Time.deltaTime;
         }
-        Debug.Log(playerVelocity.y);
     }
 
     public void ProcessCrouch()

@@ -1,24 +1,17 @@
-using UnityEngine;
-
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : HealthAbstract
 {
-    public float health;
-    public float maxHealth;
-
-    void Start()
+    protected override void OnHealthChanged()
     {
-        health = maxHealth;
         UIManager.instance.SetHealthBar(health / maxHealth);
     }
 
-    public void TakeDamage(float damage)
+    protected override void OnDamageTaken(float damage, DamageMethod damageMethod)
     {
-        health -= damage;
-        UIManager.instance.SetHealthBar(health / maxHealth);
+        UIManager.instance.TriggerHurt();
+    }
 
-        if (health <= 0)
-        {
-            LevelManager.instance.ResetGame();
-        }
+    protected override void OnDeath()
+    {
+        UIManager.instance.GameOver();
     }
 }

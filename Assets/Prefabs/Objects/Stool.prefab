@@ -144,6 +144,7 @@ MonoBehaviour:
   staticPickupRotation: 0
   pickupRotation: {x: 0, y: 0, z: 0}
   throwDamage: 5
+  damageMethod: 2
   fadesWhenPickedUp: 0
 --- !u!114 &4845340706957287324
 MonoBehaviour:
@@ -157,3 +158,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53004ce1032c5714791846dc44dd4115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackActiveState: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     private Camera _camera;
-    private PlayerUI _playerUI;
+    private UIManager _uIManager;
     private PlayerHold _playerHold;
 
     [SerializeField] private float _rayDistance = 3f;
@@ -15,14 +15,14 @@ public class PlayerInteract : MonoBehaviour
     void Start()
     {
         _camera = GetComponent<PlayerLook>().camera;
-        _playerUI = GetComponent<PlayerUI>();
+        _uIManager = UIManager.instance;
         _playerHold = GetComponent<PlayerHold>();
     }
 
 
     void Update()
     {
-        _playerUI.UpdateText(string.Empty);
+        _uIManager.SetPromptText(string.Empty);
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * _rayDistance);
@@ -33,7 +33,7 @@ public class PlayerInteract : MonoBehaviour
             if (hitInfo.collider.GetComponent<AbstractInteractable>() != null)
             {
                 AbstractInteractable interactable = hitInfo.collider.GetComponent<AbstractInteractable>();
-                _playerUI.UpdateText(interactable.promptMessage);
+                _uIManager.SetPromptText(interactable.promptMessage);
             }
 
             _currentLookingObj = hitInfo.collider.gameObject;

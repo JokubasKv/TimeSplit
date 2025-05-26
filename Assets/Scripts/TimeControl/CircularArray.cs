@@ -2,75 +2,71 @@ using UnityEngine;
 
 public class CircularArray<T>
 {
-    T[] dataArray;
-    int bufferCurrentPosition = -1;
-    int bufferCapacity;
+    T[] data;
+    int currentIndex = -1;
+    int arrayCapacity;
     float howManyRecordsPerSecond;
 
-    public CircularArray()
+    public CircularArray() : this((int)RewindController.secondsToTrack)
     {
-        try
-        {
-            howManyRecordsPerSecond = Time.timeScale / Time.fixedDeltaTime;
-            bufferCapacity = (int)(RewindManager.secondsToTrack * howManyRecordsPerSecond);
-            dataArray = new T[bufferCapacity];
-            RewindManager.RestoreBuffers += OnBuffersRestore;
-        }
-        catch
-        {
-            Debug.LogError("Error");
-        }
     }
 
-    public void WriteLastValue(T val)
+    public CircularArray(int secondsToTrack)
     {
-        bufferCurrentPosition++;
-        if (bufferCurrentPosition >= bufferCapacity)
+        howManyRecordsPerSecond = Time.timeScale / Time.fixedDeltaTime;
+        arrayCapacity = (int)(secondsToTrack * howManyRecordsPerSecond);
+        data = new T[arrayCapacity];
+        RewindController.MoveLastRewindIndex += OnMoveCurrentIndex;
+    }
+
+    public void Write(T value)
+    {
+        currentIndex++;
+        if (currentIndex >= arrayCapacity)
         {
-            bufferCurrentPosition = 0;
-            dataArray[bufferCurrentPosition] = val;
+            currentIndex = 0;
+            data[currentIndex] = value;
         }
         else
         {
-            dataArray[bufferCurrentPosition] = val;
+            data[currentIndex] = value;
         }
     }
 
-    public T ReadLastValue()
+    public T GetLastValue()
     {
-        return dataArray[bufferCurrentPosition];
+        return data[currentIndex];
     }
 
-    public T ReadFromBuffer(float seconds)
+    public T GetValue(float seconds)
     {
-        int howManyBeforeLast = (int)(howManyRecordsPerSecond * seconds);
+        int indexOffset = (int)(howManyRecordsPerSecond * seconds);
 
-        if ((bufferCurrentPosition - howManyBeforeLast) < 0)
+        if ((currentIndex - indexOffset) < 0)
         {
-            int showingIndex = bufferCapacity - (howManyBeforeLast - bufferCurrentPosition);
-            return dataArray[showingIndex];
+            int wrappedIndex = arrayCapacity - (indexOffset - currentIndex);
+            return data[wrappedIndex];
         }
         else
         {
-            return dataArray[bufferCurrentPosition - howManyBeforeLast];
+            return data[currentIndex - indexOffset];
         }
     }
-    private void MoveLastBufferPosition(float seconds)
+    private void MoveCurrentIndex(float seconds)
     {
-        int howManyBeforeLast = (int)(howManyRecordsPerSecond * seconds);
+        int indexOffset = (int)(howManyRecordsPerSecond * seconds);
 
-        if ((bufferCurrentPosition - howManyBeforeLast) < 0)
+        if ((currentIndex - indexOffset) < 0)
         {
-            bufferCurrentPosition = bufferCapacity - (howManyBeforeLast - bufferCurrentPosition);
+            currentIndex = arrayCapacity - (indexOffset - currentIndex);
         }
         else
         {
-            bufferCurrentPosition -= howManyBeforeLast;
+            currentIndex -= indexOffset;
         }
     }
-    private void OnBuffersRestore(float seconds)
+    private void OnMoveCurrentIndex(float seconds)
     {
-        MoveLastBufferPosition(seconds);
+        MoveCurrentIndex(seconds);
     }
-
 }

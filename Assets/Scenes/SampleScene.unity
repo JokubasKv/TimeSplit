@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53004ce1032c5714791846dc44dd4115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackActiveState: 0
 --- !u!1 &403884518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,6 +3569,10 @@ PrefabInstance:
       propertyPath: path
       value: 
       objectReference: {fileID: 573606955}
+    - target: {fileID: 6239448186865168726, guid: 6cee60ad260b08f40a8003c2de59cec5, type: 3}
+      propertyPath: trackActiveState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

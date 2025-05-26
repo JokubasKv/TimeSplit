@@ -18,6 +18,12 @@ public class AttackState : BaseState
 
     public override void Perform()
     {
+        if (RewindController.instance.IsBeingRewinded)
+        {
+            stateMachine.ChangeState(new CloseAttackState());
+            return;
+        }
+
         ProccessCanSeePlayer();
     }
 

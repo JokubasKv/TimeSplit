@@ -15,7 +15,7 @@ public class PickupableInteractable : AbstractInteractable
     [Header("Throw Settings")]
     [SerializeField]
     public float throwDamage = 10f;
-
+    public DamageMethod damageMethod = DamageMethod.ThrownObject;
 
     [Header("Fade Settings")]
     [SerializeField] public bool fadesWhenPickedUp = false;
@@ -72,12 +72,10 @@ public class PickupableInteractable : AbstractInteractable
     {
         if (isThrown)
         {
-            Debug.Log(collision.gameObject.name);
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 Enemy enemy = collision.gameObject.GetComponentInParent<Enemy>();
-                Debug.Log(enemy);
-                enemy.TakeDamage(throwDamage);
+                enemy.Health.TakeDamage(throwDamage, damageMethod);
             }
         }
 

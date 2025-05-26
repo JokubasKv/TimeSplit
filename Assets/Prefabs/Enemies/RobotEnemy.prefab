@@ -514,7 +514,7 @@ Transform:
   m_GameObject: {fileID: 3427235139224993241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.267, y: 2.2459, z: 0.8317}
+  m_LocalPosition: {x: 0.804, y: 2.21, z: 1.353}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -821,6 +821,7 @@ GameObject:
   - component: {fileID: 2555582555151207706}
   - component: {fileID: 8834083322404397778}
   - component: {fileID: 7938288821168733048}
+  - component: {fileID: 5918625898898483840}
   m_Layer: 0
   m_Name: RobotEnemy
   m_TagString: Enemy
@@ -837,7 +838,7 @@ Transform:
   m_GameObject: {fileID: 6569496176908614807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.190109, y: 0, z: 3.9589968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -928,6 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e26bcc2cd0f0984ca54b8c9143cbead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 0}
   _lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
   path: {fileID: 0}
   sightDistance: 20
@@ -935,11 +937,24 @@ MonoBehaviour:
   eyeHeight: 3
   gunBarrel: {fileID: 7212232149166998836}
   fireRate: 2
-  maxHealth: 15
-  health: 0
   _currentState: 
+--- !u!114 &5918625898898483840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569496176908614807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4616bf086798cc4419e0834782f7fe94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 15
   _damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashDuration: 0.2
+  _enemyType: 0
 --- !u!1 &7165206392662449692
 GameObject:
   m_ObjectHideFlags: 0

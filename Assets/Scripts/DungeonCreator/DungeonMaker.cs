@@ -236,6 +236,12 @@ public class DungeonMaker : MonoBehaviour
 
     private void CreateInRoomMiddlePlayer(GameObject prefab, RoomNode node)
     {
+        var playerHealth = GameObject.FindFirstObjectByType<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            Destroy(playerHealth.gameObject);
+        }
+
         Vector2Int bottomLeft = node.BottomLeftCorner;
         Vector2Int topRight = node.TopRightCorner;
         Vector3 roomMiddle = new Vector3(
@@ -298,10 +304,15 @@ public class DungeonMaker : MonoBehaviour
            1,
            3
         };
+        var normals = new Vector3[] {
+            Vector3.back, Vector3.back, Vector3.back, Vector3.back,
+        };
         Mesh mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.uv = uvs;
         mesh.triangles = triangles;
+        mesh.normals = normals;
+        mesh.RecalculateNormals();
 
         GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NavMeshSurface));
         dungeonFloor.transform.position = Vector3.zero;
@@ -327,6 +338,7 @@ public class DungeonMaker : MonoBehaviour
         mesh2.vertices = vertices;
         mesh2.uv = uvs;
         mesh2.triangles = triangles2;
+        mesh2.RecalculateNormals();
 
         GameObject dungeonRoof = new GameObject("Roof" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
         dungeonRoof.transform.position = Vector3.zero + new Vector3(0, 5f, 0);

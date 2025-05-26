@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     private PlayerLook _playerLook;
     private PlayerInteract _playerInteract;
     private PlayerHold _playerHold;
+    private UIManager _uiManager;
 
     void Awake()
     {
@@ -19,22 +20,29 @@ public class InputManager : MonoBehaviour
         _playerLook = GetComponent<PlayerLook>();
         _playerInteract = GetComponent<PlayerInteract>();
         _playerHold = GetComponent<PlayerHold>();
+        _uiManager = UIManager.instance;
 
         playerActions = _inputActions.Player;
 
         playerActions.Jump.performed += ctx => _playerMovement.Jump();
         playerActions.Crouch.performed += ctx => _playerMovement.Crouch();
-        playerActions.Sprint.performed += ctx => _playerMovement.Sprint();
         playerActions.Interact.performed += ctx => _playerInteract.Interact();
         playerActions.Throw.performed += ctx => _playerHold.ThrowObject();
 
         playerActions.Attack.started += ctx => _playerHold.AttackPressed();
         playerActions.Attack.canceled += ctx => _playerHold.AttackReleased();
+
+        playerActions.Escape.performed += ctx => _uiManager.PauseResumeGame();
     }
 
     private void Update()
     {
         _playerMovement.ProcesMove(playerActions.Move.ReadValue<Vector2>());
+
+        if (playerActions.Dash.IsPressed())
+        {
+            _playerMovement.Dash(playerActions.Move.ReadValue<Vector2>());
+        }
     }
 
     private void LateUpdate()

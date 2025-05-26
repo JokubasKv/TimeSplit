@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 1309357227083444587}
   - component: {fileID: 6239448186865168726}
   - component: {fileID: 5443491560584411886}
+  - component: {fileID: 1545198740875643823}
   m_Layer: 0
   m_Name: CubeEnemy
   m_TagString: Enemy
@@ -223,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 4230781161249590125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.03, y: 1.14, z: -8.73}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5659a553b902f43a41e5c7d1ee3b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackTransform: 1
+  trackActiveState: 0
 --- !u!114 &5443491560584411886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e26bcc2cd0f0984ca54b8c9143cbead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 0}
   _lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
   path: {fileID: 0}
   sightDistance: 20
@@ -298,11 +300,24 @@ MonoBehaviour:
   eyeHeight: 0
   gunBarrel: {fileID: 8669715295608967714}
   fireRate: 1
-  maxHealth: 15
-  health: 0
   _currentState: 
+--- !u!114 &1545198740875643823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230781161249590125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4616bf086798cc4419e0834782f7fe94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 10
   _damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashDuration: 0.2
+  _enemyType: 2
 --- !u!1001 &5278095156042406766
 PrefabInstance:
   m_ObjectHideFlags: 0

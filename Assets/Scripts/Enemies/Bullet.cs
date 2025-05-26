@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float damage = 10f;
+    [SerializeField] public float damage = 10f;
+    [SerializeField] public DamageMethod damageMethod = DamageMethod.Bullet;
 
     private void OnCollisionEnter(Collision collision)
     {
         Transform hitTransform = collision.transform;
-        if (hitTransform.CompareTag("Player"))
+        var healthAbstract = hitTransform.GetComponent<HealthAbstract>();
+        if (healthAbstract != null)
         {
-            Debug.Log("Hit Player");
-
-            hitTransform.GetComponent<PlayerHealth>().TakeDamage(damage);
+            healthAbstract.TakeDamage(damage, damageMethod);
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

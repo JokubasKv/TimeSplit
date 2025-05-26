@@ -7,7 +7,7 @@ public class TimeClockHandController : MonoBehaviour
 
     private Vector3 _startingRotation;
 
-    private void Start()
+    private void OnEnable()
     {
         _startingRotation = clockHand.localEulerAngles;
     }
