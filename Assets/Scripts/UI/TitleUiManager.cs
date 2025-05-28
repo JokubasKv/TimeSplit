@@ -7,6 +7,12 @@ public class TitleUiManager : MonoBehaviour
     public GameObject loadingPanel;
     public GameObject mainMenuPanel;
 
+    public void ClickOnTestingScene()
+    {
+        SceneManager.LoadSceneAsync("ExampleScene");
+    }
+
+
     public void ClickOnPlay()
     {
         StartCoroutine(LoadGameLevel());

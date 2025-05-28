@@ -43,12 +43,15 @@ public class DungeonMaker : MonoBehaviour
     public float roomWallObjectDensity = 0.1f;
     public List<GameObject> lightPrefabs;
     public List<GameObject> enemyPrefabs;
+    public List<GameObject> weaponPrefabs;
+
 
     public GameObject startingRoomPrefab;
     public GameObject exitRoomPrefab;
 
     public GameObject playerPrefab;
     public GameObject uiPrefab;
+
 
     private List<GameObject> _dungeonFloors;
 
@@ -192,7 +195,7 @@ public class DungeonMaker : MonoBehaviour
 
     private void CreateRoomObjectsRandom(Vector2Int bottomLeft, Vector2Int topRight, Vector2Int roomSize)
     {
-        int objectCount = Mathf.Max(1, roomSize.x * roomSize.y / 10); // Adjust density as needed
+        int objectCount = Mathf.Max(1, roomSize.x * roomSize.y / 20); // Adjust density as needed
         for (int i = 0; i < objectCount; i++)
         {
             Vector3 randomPosition = new Vector3(
@@ -205,6 +208,18 @@ public class DungeonMaker : MonoBehaviour
 
             GameObject randomPrefab = roomObjectPrefabs[UnityEngine.Random.Range(0, roomObjectPrefabs.Count)];
             Instantiate(randomPrefab, randomPosition + randomPrefab.transform.position, randomRotation, transform);
+        }
+
+        // Random chance to create a weapon in the middle of the room
+        if (weaponPrefabs != null && weaponPrefabs.Count > 0 && UnityEngine.Random.value < 0.25f) // 25% chance
+        {
+            Vector3 roomMiddle = new Vector3(
+                (bottomLeft.x + topRight.x) / 2.0f,
+                2,
+                (bottomLeft.y + topRight.y) / 2.0f
+            );
+            GameObject weaponPrefab = weaponPrefabs[UnityEngine.Random.Range(0, weaponPrefabs.Count)];
+            Instantiate(weaponPrefab, roomMiddle + weaponPrefab.transform.position, Quaternion.identity, transform);
         }
     }
 

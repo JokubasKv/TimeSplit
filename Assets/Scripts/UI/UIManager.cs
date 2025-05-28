@@ -122,6 +122,8 @@ public class UIManager : MonoSingleton<UIManager>
         {
             yield return null;
         }
+
+        Destroy(gameObject);
     }
 
     public void SetLoadingScreen()
