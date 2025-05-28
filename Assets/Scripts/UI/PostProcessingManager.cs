@@ -24,6 +24,13 @@ public class PostProcessingManager : MonoBehaviour
 
     public void StartRewind()
     {
+        if (_volume == null)
+        {
+            _volume = FindAnyObjectByType<Volume>();
+            _volume.profile.TryGet(out _chromatic);
+            _volume.profile.TryGet(out _distortion);
+        }
+
         _startEffectCourutine = ApplyStartEffect();
         StartCoroutine(_startEffectCourutine);
     }

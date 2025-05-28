@@ -2990,7 +2990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deactivateOnLoad: 0
-  _dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 1
   healthBarImage: {fileID: 3667237371920910530}
   dashBarImage: {fileID: 56735805496567546}
   promptText: {fileID: 929308212713544811}
@@ -3128,7 +3128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deactivateOnLoad: 0
-  _dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 1
   displayDuration: 3
 --- !u!114 &5394213602703308729
 MonoBehaviour:

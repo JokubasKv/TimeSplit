@@ -382,6 +382,7 @@ MonoBehaviour:
   staticPickupRotation: 0
   pickupRotation: {x: 0, y: 0, z: 0}
   throwDamage: 10
+  damageMethod: 1
   fadesWhenPickedUp: 1
 --- !u!65 &377982173
 BoxCollider:
@@ -625,7 +626,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e3576d7693b80dc4e928a68501802ac7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9538f7094eb8fd04db1fb1a776b644e2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &410087039
 GameObject:
@@ -3413,7 +3414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 102404041966065285, guid: 2df2e1465af4fc447acb434c06fa8bba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.22
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 102404041966065285, guid: 2df2e1465af4fc447acb434c06fa8bba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3625,6 +3626,18 @@ PrefabInstance:
     - target: {fileID: 2254628034022963087, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846828567809274501, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846828567809274501, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846828567809274501, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6894772464446601752, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
       propertyPath: m_Name

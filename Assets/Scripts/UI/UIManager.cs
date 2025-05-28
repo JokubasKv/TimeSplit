@@ -129,6 +129,11 @@ public class UIManager : MonoSingleton<UIManager>
         loadingPanel.SetActive(true);
     }
 
+    public void OffLoadingScreen()
+    {
+        loadingPanel.SetActive(false);
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -166,6 +171,11 @@ public class UIManager : MonoSingleton<UIManager>
     {
         string pointEntryTextValue = string.Join("\n*", texts);
         pointEntryText.text = pointEntryTextValue;
+        SetTotalPoints(totalPoints);
+    }
+
+    private void SetTotalPoints(int totalPoints)
+    {
         pointsText.text = $"Points: {totalPoints.ToString()}";
     }
 
@@ -182,6 +192,14 @@ public class UIManager : MonoSingleton<UIManager>
     public void Retry()
     {
         LevelManager.instance.ResetGame();
+    }
+
+    public void RemoveLoadingStuff()
+    {
+        loadingPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        gamePanel.SetActive(true);
+        SetTotalPoints(PointsController.instance.TotalPoints);
     }
 
     protected override void InternalInit()

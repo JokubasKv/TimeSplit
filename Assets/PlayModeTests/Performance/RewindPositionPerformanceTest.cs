@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using Unity.PerformanceTesting;
 using UnityEngine;
@@ -132,6 +133,111 @@ public class RewindPositionPerformanceTest
             yield return new WaitForSeconds(rewindManager.secondsAvailableForRewind);
             pressToRewind.TurnBackTimeReleased();
         }
+
+        yield return null;
+    }
+    [UnityTest, Performance]
+    public IEnumerator Rewind_Performance_NoTracking()
+    {
+        foreach (var obj in spawnedObjects)
+        {
+            obj.GetComponent<RewindAbstract>().IsTracking = false;
+        }
+
+        using (Measure.Frames().Scope())
+        {
+            for (int frame = 0; frame < RewindController.secondsToTrack / Time.fixedDeltaTime; frame++)
+            {
+                foreach (var obj in spawnedObjects)
+                {
+                    if (obj != null)
+                        obj.transform.position += Random.onUnitSphere * 0.1f;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        yield return null;
+    }
+
+    [UnityTest, Performance]
+    public IEnumerator Rewind_Performance_Tracking()
+    {
+        using (Measure.Frames().Scope())
+        {
+            for (int frame = 0; frame < RewindController.secondsToTrack / Time.fixedDeltaTime; frame++)
+            {
+                foreach (var obj in spawnedObjects)
+                {
+                    if (obj != null)
+                        obj.transform.position += Random.onUnitSphere * 0.1f;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        yield return null;
+    }
+
+    [UnityTest, Performance]
+    public IEnumerator Rewind_MemoryUsage_Tracking()
+    {
+        var rewindAbstracts = spawnedObjects
+            .Select(obj => obj.GetComponent<RewindPosition>())
+            .Where(rewind => rewind != null)
+            .ToArray();
+
+        foreach (var rewind in rewindAbstracts)
+        {
+            rewind.MainInit();
+        }
+
+        Measure.Method(() =>
+        {
+            for (int frame = 0; frame < RewindController.secondsToTrack / Time.fixedDeltaTime; frame++)
+            {
+                foreach (var rewind in rewindAbstracts)
+                {
+                    rewind.Track();
+                }
+            }
+        })
+        .WarmupCount(3)
+        .MeasurementCount(10)
+        .GC()
+        .Run();
+
+        yield return null;
+    }
+
+    [UnityTest, Performance]
+    public IEnumerator Rewind_MemoryUsage_NoTracking()
+    {
+        var rewindAbstracts = spawnedObjects
+            .Select(obj => obj.GetComponent<RewindAbstract>())
+            .Where(rewind => rewind != null)
+            .ToArray();
+
+        foreach (var rewind in rewindAbstracts)
+        {
+            rewind.MainInit();
+            rewind.IsTracking = false;
+        }
+
+        Measure.Method(() =>
+        {
+            for (int frame = 0; frame < RewindController.secondsToTrack / Time.fixedDeltaTime; frame++)
+            {
+                foreach (var rewind in rewindAbstracts)
+                {
+                    rewind.Track();
+                }
+            }
+        })
+        .WarmupCount(3)
+        .MeasurementCount(10)
+        .GC()
+        .Run();
 
         yield return null;
     }

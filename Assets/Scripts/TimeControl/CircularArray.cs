@@ -13,7 +13,7 @@ public class CircularArray<T>
 
     public CircularArray(int secondsToTrack)
     {
-        howManyRecordsPerSecond = Time.timeScale / Time.fixedDeltaTime;
+        howManyRecordsPerSecond = 1 / Time.fixedDeltaTime;
         arrayCapacity = (int)(secondsToTrack * howManyRecordsPerSecond);
         data = new T[arrayCapacity];
         RewindController.MoveLastRewindIndex += OnMoveCurrentIndex;

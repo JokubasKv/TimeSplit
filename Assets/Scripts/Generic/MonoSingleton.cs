@@ -37,7 +37,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
                 return _instance;
             }
 
-            var instances = Resources.FindObjectsOfTypeAll<T>();
+            var instances = GameObject.FindObjectsByType<T>(FindObjectsSortMode.None);
             if (instances == null || instances.Length == 0)
             {
                 return null;

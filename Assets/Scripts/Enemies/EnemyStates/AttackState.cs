@@ -35,7 +35,7 @@ public class AttackState : BaseState
             _moveTimer += Time.deltaTime;
             _shotTimer += Time.deltaTime;
 
-            enemy.transform.LookAt(enemy.Player.transform);
+            enemy.LookAt(enemy.Player.transform.position);
 
             if (_shotTimer > enemy.fireRate)
             {
@@ -66,17 +66,47 @@ public class AttackState : BaseState
             }
         }
     }
-
     public void Shoot()
     {
         Transform gunBarrel = enemy.gunBarrel;
-        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gunBarrel.position, enemy.transform.rotation);
+        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/EnemyBullet") as GameObject, gunBarrel.position, enemy.transform.rotation);
         Vector3 shootDirection = (enemy.Player.transform.position - gunBarrel.transform.position).normalized;
         Quaternion randomAngle = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up);
 
-        bullet.GetComponent<Rigidbody>().linearVelocity = randomAngle * shootDirection * 40;
-
+        // Start coroutine to grow and then shoot the bullet
+        enemy.StartCoroutine(GrowAndShootBullet(bullet, randomAngle * shootDirection * 40));
 
         _shotTimer = 0;
+    }
+
+    private System.Collections.IEnumerator GrowAndShootBullet(GameObject bullet, Vector3 velocity)
+    {
+        float growDuration = 1f;
+        float timer = 0f;
+        Vector3 initialScale = Vector3.zero;
+        Vector3 targetScale = bullet.transform.localScale;
+        bullet.transform.localScale = initialScale;
+        bullet.transform.SetParent(enemy.gunBarrel.transform);
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+
+        while (timer < growDuration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / growDuration);
+            bullet.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+            yield return null;
+        }
+
+        if (rb != null)
+        {
+            bullet.transform.SetParent(null);
+            rb.isKinematic = false;
+            rb.linearVelocity = velocity;
+        }
     }
 }

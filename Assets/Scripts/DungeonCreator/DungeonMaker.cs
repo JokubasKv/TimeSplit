@@ -48,6 +48,7 @@ public class DungeonMaker : MonoBehaviour
     public GameObject exitRoomPrefab;
 
     public GameObject playerPrefab;
+    public GameObject uiPrefab;
 
     private List<GameObject> _dungeonFloors;
 
@@ -239,7 +240,7 @@ public class DungeonMaker : MonoBehaviour
         var playerHealth = GameObject.FindFirstObjectByType<PlayerHealth>();
         if (playerHealth != null)
         {
-            Destroy(playerHealth.gameObject);
+            DestroyImmediate(playerHealth.gameObject);
         }
 
         Vector2Int bottomLeft = node.BottomLeftCorner;
@@ -249,6 +250,9 @@ public class DungeonMaker : MonoBehaviour
             0,
             (bottomLeft.y + topRight.y) / 2.0f
         );
+
+        if (UIManager.instance == null)
+            Instantiate(uiPrefab, Vector3.zero, Quaternion.identity);
 
         Instantiate(prefab, roomMiddle + prefab.transform.position, Quaternion.identity);
     }
@@ -396,22 +400,50 @@ public class DungeonMaker : MonoBehaviour
     }
     private void PlaceObjectNearWall(Vector2Int bottomLeft, Vector2Int topRight)
     {
+        // Helper function to check if a wall position is a door (corridor entrance), considering corridor width
+        bool IsNearCorridor(Vector3Int pos, bool horizontal)
+        {
+            if (horizontal)
+            {
+                for (int offset = -corridorWidth / 2; offset <= corridorWidth / 2; offset++)
+                {
+                    Vector3Int checkPos = pos + new Vector3Int(offset, 0, 0);
+                    if (possibleDoorHorizontalPosition.Contains(checkPos))
+                        return true;
+                }
+                return false;
+            }
+            else
+            {
+                for (int offset = -corridorWidth / 2; offset <= corridorWidth / 2; offset++)
+                {
+                    Vector3Int checkPos = pos + new Vector3Int(0, 0, offset);
+                    if (possibleDoorVerticalPosition.Contains(checkPos))
+                        return true;
+                }
+                return false;
+            }
+        }
+
         // Iterate over the horizontal walls  
         for (int x = bottomLeft.x + 1; x < topRight.x; x++) // Adjusted to stay inside the walls
         {
-            if (UnityEngine.Random.value < roomWallObjectDensity) // Randomly decide whether to place an object  
+            Vector3Int posBottom = Vector3Int.CeilToInt(new Vector3(x, 0, bottomLeft.y));
+            Vector3Int posTop = Vector3Int.CeilToInt(new Vector3(x, 0, topRight.y));
+
+            if (!IsNearCorridor(posBottom, true) && UnityEngine.Random.value < roomWallObjectDensity)
             {
                 // Bottom wall  
-                Vector3 positionBottom = new Vector3(x, 0, bottomLeft.y + 0.5f); // Adjusted position to be inside
+                Vector3 positionBottom = new Vector3(x, 0, bottomLeft.y);
                 Quaternion rotationBottom = Quaternion.Euler(0, 180, 0);
                 InstantiateObjectNearWall(positionBottom, rotationBottom);
             }
 
-            if (UnityEngine.Random.value < roomWallObjectDensity) // Randomly decide whether to place an object  
+            if (!IsNearCorridor(posTop, true) && UnityEngine.Random.value < roomWallObjectDensity)
             {
                 // Top wall  
-                Vector3 positionTop = new Vector3(x, 0, topRight.y - 0.5f); // Adjusted position to be inside
-                Quaternion rotationTop = Quaternion.Euler(0, 180, 0);
+                Vector3 positionTop = new Vector3(x, 0, topRight.y);
+                Quaternion rotationTop = Quaternion.Euler(0, -180, 0);
                 InstantiateObjectNearWall(positionTop, rotationTop);
             }
         }
@@ -419,18 +451,21 @@ public class DungeonMaker : MonoBehaviour
         // Iterate over the vertical walls  
         for (int z = bottomLeft.y + 1; z < topRight.y; z++) // Adjusted to stay inside the walls
         {
-            if (UnityEngine.Random.value < roomWallObjectDensity) // Randomly decide whether to place an object  
+            Vector3Int posLeft = Vector3Int.CeilToInt(new Vector3(bottomLeft.x, 0, z));
+            Vector3Int posRight = Vector3Int.CeilToInt(new Vector3(topRight.x, 0, z));
+
+            if (!IsNearCorridor(posLeft, false) && UnityEngine.Random.value < roomWallObjectDensity)
             {
                 // Left wall  
-                Vector3 positionLeft = new Vector3(bottomLeft.x + 0.5f, 0, z); // Adjusted position to be inside
+                Vector3 positionLeft = new Vector3(bottomLeft.x, 0, z);
                 Quaternion rotationLeft = Quaternion.Euler(0, -90, 0);
                 InstantiateObjectNearWall(positionLeft, rotationLeft);
             }
 
-            if (UnityEngine.Random.value < roomWallObjectDensity) // Randomly decide whether to place an object  
+            if (!IsNearCorridor(posRight, false) && UnityEngine.Random.value < roomWallObjectDensity)
             {
                 // Right wall  
-                Vector3 positionRight = new Vector3(topRight.x - 0.5f, 0, z); // Adjusted position to be inside
+                Vector3 positionRight = new Vector3(topRight.x, 0, z);
                 Quaternion rotationRight = Quaternion.Euler(0, 90, 0);
                 InstantiateObjectNearWall(positionRight, rotationRight);
             }
@@ -442,6 +477,6 @@ public class DungeonMaker : MonoBehaviour
         if (roomWallObjectPrefabs.Count == 0) return;
 
         GameObject prefab = roomWallObjectPrefabs[UnityEngine.Random.Range(0, roomWallObjectPrefabs.Count)];
-        Instantiate(prefab, position, rotation, transform);
+        Instantiate(prefab, position + prefab.transform.position, rotation * prefab.transform.rotation, transform);
     }
 }

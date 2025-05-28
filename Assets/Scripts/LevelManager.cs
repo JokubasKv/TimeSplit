@@ -27,7 +27,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         remakePlayer = true;
         level = 0;
-        PointsController.instance.ResetPoints();
+        //PointsController.instance.ResetPoints();
         StartCoroutine(LoadGameSceneCouroutine());
     }
 
@@ -43,5 +43,7 @@ public class LevelManager : MonoSingleton<LevelManager>
         {
             yield return null;
         }
+
+        UIManager.instance.RemoveLoadingStuff();
     }
 }

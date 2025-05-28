@@ -1,20 +1,20 @@
 {
   "summary": {
-    "generatedon": "2025-05-15T01:14:32Z",
-    "parser": "MultiReportParser (4x OpenCoverParser)",
+    "generatedon": "2025-05-26T18:35:06Z",
+    "parser": "MultiReportParser (6x OpenCoverParser)",
     "assemblies": 5,
-    "classes": 69,
-    "files": 68,
-    "coveredlines": 1353,
-    "uncoveredlines": 1924,
-    "coverablelines": 3277,
-    "totallines": 7185,
-    "linecoverage": 41.2,
+    "classes": 70,
+    "files": 69,
+    "coveredlines": 1421,
+    "uncoveredlines": 2119,
+    "coverablelines": 3540,
+    "totallines": 7361,
+    "linecoverage": 40.1,
     "coveredbranches": 0,
     "totalbranches": 0,
-    "coveredmethods": 241,
-    "totalmethods": 511,
-    "methodcoverage": 47.1
+    "coveredmethods": 278,
+    "totalmethods": 568,
+    "methodcoverage": 48.9
  },
   "coverage": {
     "assemblies": [
@@ -25,17 +25,18 @@
         { "name": "ScifiOffice.DemoFirstPersonController", "coverage": 0, "coveredlines": 0, "coverablelines": 112, "totallines": 210, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 } ] },
       { "name": "Assembly-CSharp-Editor", "classes": 1, "coverage": 0, "coveredlines": 0, "coverablelines": 8, "totallines": 16, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1, "classesinassembly": [
         { "name": "DungeonMakerEditor", "coverage": 0, "coveredlines": 0, "coverablelines": 8, "totallines": 16, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 } ] },
-      { "name": "EditorTests", "classes": 3, "coverage": 100, "coveredlines": 165, "coverablelines": 165, "totallines": 279, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 32, "totalmethods": 32, "classesinassembly": [
+      { "name": "EditorTests", "classes": 3, "coverage": 94.2, "coveredlines": 165, "coverablelines": 175, "totallines": 260, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 39, "totalmethods": 39, "classesinassembly": [
         { "name": "CircularArrayTests", "coverage": 100, "coveredlines": 42, "coverablelines": 42, "totallines": 71, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 4, "totalmethods": 4 },
         { "name": "FuzzyCompareTests", "coverage": 100, "coveredlines": 70, "coverablelines": 70, "totallines": 123, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 16, "totalmethods": 16 },
-        { "name": "RewindAbstractTests", "coverage": 100, "coveredlines": 53, "coverablelines": 53, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 12, "totalmethods": 12 } ] },
-      { "name": "GameLogic", "classes": 50, "coverage": 28.4, "coveredlines": 653, "coverablelines": 2297, "totallines": 5577, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 35.3, "coveredmethods": 128, "totalmethods": 362, "classesinassembly": [
+        { "name": "RewindAbstractTests", "coverage": 84.1, "coveredlines": 53, "coverablelines": 63, "totallines": 66, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 19, "totalmethods": 19 } ] },
+      { "name": "GameLogic", "classes": 51, "coverage": 27.4, "coveredlines": 673, "coverablelines": 2449, "totallines": 5668, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 37.1, "coveredmethods": 148, "totalmethods": 398, "classesinassembly": [
         { "name": "AbstractInteractable", "coverage": 60, "coveredlines": 3, "coverablelines": 5, "totallines": 16, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 1, "totalmethods": 2 },
         { "name": "AbstractNode", "coverage": 0, "coveredlines": 0, "coverablelines": 22, "totallines": 38, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 18 },
-        { "name": "AttackState", "coverage": 0, "coveredlines": 0, "coverablelines": 47, "totallines": 76, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
+        { "name": "AttackState", "coverage": 0, "coveredlines": 0, "coverablelines": 61, "totallines": 82, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 7 },
         { "name": "BinarySpacePartitioner", "coverage": 0, "coveredlines": 0, "coverablelines": 67, "totallines": 132, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 },
         { "name": "Bullet", "coverage": 0, "coveredlines": 0, "coverablelines": 11, "totallines": 19, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },
         { "name": "CircularArray[T]", "coverage": 100, "coveredlines": 47, "coverablelines": 47, "totallines": 72, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 7, "totalmethods": 7 },
+        { "name": "CloseAttackState", "coverage": 0, "coveredlines": 0, "coverablelines": 54, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
         { "name": "CorridorNode", "coverage": 0, "coveredlines": 0, "coverablelines": 143, "totallines": 249, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 },
         { "name": "CorridorsGenerator", "coverage": 0, "coveredlines": 0, "coverablelines": 15, "totallines": 23, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
         { "name": "DungeonGenerator", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 40, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },
@@ -55,7 +56,7 @@
         { "name": "PatrolState", "coverage": 0, "coveredlines": 0, "coverablelines": 45, "totallines": 74, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "PickupableInteractable", "coverage": 92, "coveredlines": 46, "coverablelines": 50, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 7, "totalmethods": 7 },
         { "name": "PlayerHealth", "coverage": 0, "coveredlines": 0, "coverablelines": 9, "totallines": 17, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
-        { "name": "PlayerHold", "coverage": 67, "coveredlines": 61, "coverablelines": 91, "totallines": 148, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 83.3, "coveredmethods": 10, "totalmethods": 12 },
+        { "name": "PlayerHold", "coverage": 50.8, "coveredlines": 61, "coverablelines": 120, "totallines": 147, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 82.6, "coveredmethods": 19, "totalmethods": 23 },
         { "name": "PlayerInteract", "coverage": 40.5, "coveredlines": 15, "coverablelines": 37, "totallines": 65, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 75, "coveredmethods": 3, "totalmethods": 4 },
         { "name": "PlayerLook", "coverage": 100, "coveredlines": 9, "coverablelines": 9, "totallines": 21, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 2, "totalmethods": 2 },
         { "name": "PlayerMovement", "coverage": 54.6, "coveredlines": 59, "coverablelines": 108, "totallines": 155, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 60, "coveredmethods": 6, "totalmethods": 10 },
@@ -63,12 +64,12 @@
         { "name": "PointsController", "coverage": 55.6, "coveredlines": 49, "coverablelines": 88, "totallines": 161, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.7, "coveredmethods": 12, "totalmethods": 14 },
         { "name": "PostProcessingManager", "coverage": 0, "coveredlines": 0, "coverablelines": 56, "totallines": 86, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
         { "name": "PressToRewind", "coverage": 89, "coveredlines": 49, "coverablelines": 55, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 7, "totalmethods": 7 },
-        { "name": "RewindAbstract", "coverage": 100, "coveredlines": 75, "coverablelines": 75, "totallines": 133, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 17, "totalmethods": 17 },
+        { "name": "RewindAbstract", "coverage": 93.1, "coveredlines": 95, "coverablelines": 102, "totallines": 100, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 96.5, "coveredmethods": 28, "totalmethods": 29 },
         { "name": "RewindController", "coverage": 81.8, "coveredlines": 45, "coverablelines": 55, "totallines": 95, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 14, "totalmethods": 14 },
         { "name": "RewindHealth", "coverage": 0, "coveredlines": 0, "coverablelines": 31, "totallines": 48, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "RewindPoints", "coverage": 0, "coveredlines": 0, "coverablelines": 38, "totallines": 70, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "RewindPosition", "coverage": 100, "coveredlines": 17, "coverablelines": 17, "totallines": 31, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
-        { "name": "RewindRigidbody", "coverage": 0, "coveredlines": 0, "coverablelines": 19, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "RewindRigidbody", "coverage": 0, "coveredlines": 0, "coverablelines": 47, "totallines": 68, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 },
         { "name": "RoomGenerator", "coverage": 0, "coveredlines": 0, "coverablelines": 21, "totallines": 38, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },
         { "name": "RoomNode", "coverage": 0, "coveredlines": 0, "coverablelines": 11, "totallines": 30, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "SearchState", "coverage": 0, "coveredlines": 0, "coverablelines": 25, "totallines": 43, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
@@ -80,7 +81,7 @@
         { "name": "TimeClockHandController", "coverage": 0, "coveredlines": 0, "coverablelines": 8, "totallines": 21, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },
         { "name": "TitleUiManager", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 35, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "UIManager", "coverage": 10.5, "coveredlines": 12, "coverablelines": 114, "totallines": 199, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 18.1, "coveredmethods": 4, "totalmethods": 22 } ] },
-      { "name": "PlayModeTests", "classes": 11, "coverage": 96.3, "coveredlines": 535, "coverablelines": 555, "totallines": 1038, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 88, "coveredmethods": 81, "totalmethods": 92, "classesinassembly": [
+      { "name": "PlayModeTests", "classes": 11, "coverage": 88.8, "coveredlines": 583, "coverablelines": 656, "totallines": 1142, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.8, "coveredmethods": 91, "totalmethods": 106, "classesinassembly": [
         { "name": "EnemyTests", "coverage": 100, "coveredlines": 51, "coverablelines": 51, "totallines": 94, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 10, "totalmethods": 10 },
         { "name": "PickupableInteractableTests", "coverage": 100, "coveredlines": 51, "coverablelines": 51, "totallines": 94, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 7, "totalmethods": 7 },
         { "name": "PlayerHoldTests", "coverage": 98.3, "coveredlines": 59, "coverablelines": 60, "totallines": 105, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 9, "totalmethods": 9 },
@@ -88,9 +89,9 @@
         { "name": "PlayerLookTests", "coverage": 100, "coveredlines": 44, "coverablelines": 44, "totallines": 84, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
         { "name": "PlayerMovementTests", "coverage": 100, "coveredlines": 64, "coverablelines": 64, "totallines": 109, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 8, "totalmethods": 8 },
         { "name": "PointsControllerTests", "coverage": 93.4, "coveredlines": 57, "coverablelines": 61, "totallines": 112, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 87.5, "coveredmethods": 7, "totalmethods": 8 },
-        { "name": "RewindAbstractTests", "coverage": 71.4, "coveredlines": 15, "coverablelines": 21, "totallines": 43, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 3, "totalmethods": 9 },
+        { "name": "RewindAbstractTests", "coverage": 55.5, "coveredlines": 15, "coverablelines": 27, "totallines": 41, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 42.8, "coveredmethods": 6, "totalmethods": 14 },
         { "name": "RewindControllerTests", "coverage": 97.5, "coveredlines": 39, "coverablelines": 40, "totallines": 73, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
-        { "name": "RewindPositionPerformanceTest", "coverage": 95.1, "coveredlines": 79, "coverablelines": 83, "totallines": 138, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
+        { "name": "RewindPositionPerformanceTest", "coverage": 71.3, "coveredlines": 127, "coverablelines": 178, "totallines": 244, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.7, "coveredmethods": 12, "totalmethods": 14 },
         { "name": "StateMachineTests", "coverage": 95.8, "coveredlines": 46, "coverablelines": 48, "totallines": 116, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 88.2, "coveredmethods": 15, "totalmethods": 17 } ] } ]
   }
 }

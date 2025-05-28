@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
     protected StateMachine _stateMachine;
     private NavMeshAgent _agent;
-    private GameObject _player;
+    protected GameObject _player;
     public EnemyHealth _health;
     [SerializeField]
     private Vector3 _lastKnownPlayerPosition;
@@ -39,11 +39,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        _currentState = _stateMachine.activeState.ToString();
+        _currentState = _stateMachine.activeState?.ToString() ?? "";
 
     }
 
-    public bool CanSeePlayer()
+    public virtual bool CanSeePlayer()
     {
         if (_player == null) return false;
 
@@ -68,5 +68,10 @@ public class Enemy : MonoBehaviour
         }
 
         return false;
+    }
+
+    public virtual void LookAt(Vector3 position)
+    {
+        transform.LookAt(Player.transform.position);
     }
 }
