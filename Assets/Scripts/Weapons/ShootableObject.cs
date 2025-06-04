@@ -31,7 +31,7 @@ public class ShootableObject : MonoBehaviour
         float y = Random.Range(-spread, spread);
 
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, bullet.transform.rotation);
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);

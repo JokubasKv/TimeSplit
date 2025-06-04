@@ -3566,6 +3566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CubeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4230781161249590125, guid: 6cee60ad260b08f40a8003c2de59cec5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5443491560584411886, guid: 6cee60ad260b08f40a8003c2de59cec5, type: 3}
       propertyPath: path
       value: 
@@ -3642,6 +3646,10 @@ PrefabInstance:
     - target: {fileID: 6894772464446601752, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
       propertyPath: m_Name
       value: Lazer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894772464446601752, guid: fd17ef93397586b4a9836b0b974b5bea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

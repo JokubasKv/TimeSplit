@@ -5,6 +5,7 @@ public class AttackState : BaseState
     private float _moveTimer;
     private float _loosePlayerTimer;
     private float _shotTimer;
+    private bool _currentlyShooting;
 
     public override void Enter()
     {
@@ -42,7 +43,7 @@ public class AttackState : BaseState
                 Shoot();
             }
 
-            if (_moveTimer > Random.Range(1, 5))
+            if (_moveTimer > Random.Range(1, 5) && !_currentlyShooting)
             {
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
                 _moveTimer = 0;
@@ -70,23 +71,38 @@ public class AttackState : BaseState
     {
         Transform gunBarrel = enemy.gunBarrel;
         GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/EnemyBullet") as GameObject, gunBarrel.position, enemy.transform.rotation);
-        Vector3 shootDirection = (enemy.Player.transform.position - gunBarrel.transform.position).normalized;
-        Quaternion randomAngle = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up);
 
-        // Start coroutine to grow and then shoot the bullet
-        enemy.StartCoroutine(GrowAndShootBullet(bullet, randomAngle * shootDirection * 40));
+        Vector3 playerPosition = enemy.Player.transform.position;
+        CharacterController playerRb = enemy.Player.GetComponent<CharacterController>();
+        Vector3 playerVelocity = playerRb != null ? playerRb.velocity : Vector3.zero;
+
+        float bulletSpeed = 80f;
+        Vector3 toPlayer = playerPosition - gunBarrel.position;
+        float distance = toPlayer.magnitude;
+        float timeToTarget = bulletSpeed > 0 ? distance / bulletSpeed : 0f;
+        Vector3 predictedPosition = playerPosition + playerVelocity * timeToTarget;
+
+        Vector3 shootDirection = (predictedPosition - gunBarrel.position).normalized;
+
+        enemy.StartCoroutine(GrowAndShootBullet(bullet, shootDirection * bulletSpeed));
 
         _shotTimer = 0;
     }
 
     private System.Collections.IEnumerator GrowAndShootBullet(GameObject bullet, Vector3 velocity)
     {
-        float growDuration = 1f;
+        float growDuration = 0.5f;
         float timer = 0f;
         Vector3 initialScale = Vector3.zero;
         Vector3 targetScale = bullet.transform.localScale;
         bullet.transform.localScale = initialScale;
         bullet.transform.SetParent(enemy.gunBarrel.transform);
+
+        _currentlyShooting = true;
+        if (enemy.Agent != null && enemy.Agent.hasPath)
+        {
+            enemy.Agent.ResetPath();
+        }
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
@@ -108,5 +124,7 @@ public class AttackState : BaseState
             rb.isKinematic = false;
             rb.linearVelocity = velocity;
         }
+
+        _currentlyShooting = false;
     }
 }

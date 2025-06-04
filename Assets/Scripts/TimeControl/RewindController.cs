@@ -2,12 +2,6 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public enum OutOfBoundsBehaviour
-{
-    Disable,
-    DisableDestroy
-}
-
 public class RewindController : MonoSingleton<RewindController>
 {
     public static readonly float secondsToTrack = 6;
@@ -21,6 +15,7 @@ public class RewindController : MonoSingleton<RewindController>
     [SerializeField] public static Action<float> RewindTimeCall;
     [SerializeField] public static Action<bool> TrackingStateCall;
     [SerializeField] public static Action<float> MoveLastRewindIndex;
+    [SerializeField] public static Action ActivateStateUpdateCall;
 
     private void OnEnable()
     {
@@ -80,6 +75,8 @@ public class RewindController : MonoSingleton<RewindController>
             if (secondsAvailableForRewind > secondsToTrack)
                 secondsAvailableForRewind = secondsToTrack;
         }
+
+        ActivateStateUpdateCall?.Invoke();
     }
 
     protected override void InternalInit()

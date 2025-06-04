@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHealth : HealthAbstract
 {
-    private Renderer _renderer;
-    private Color _originalColor;
+    private Renderer[] _renderers;
+    private Color[] _originalColors;
     [SerializeField]
     private Color _damageFlashColor = Color.red;
     [SerializeField]
@@ -18,19 +18,42 @@ public class EnemyHealth : HealthAbstract
 
     protected override void InitStart()
     {
-        _renderer = GetComponentInChildren<Renderer>();
-
-        if (_renderer != null)
+        _renderers = GetComponentsInChildren<Renderer>();
+        if (_renderers != null && _renderers.Length > 0)
         {
-            _originalColor = _renderer.material.color;
+            _originalColors = new Color[_renderers.Length];
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _originalColors[i] = _renderers[i].material.color;
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_renderers != null && _originalColors != null)
+        {
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = _originalColors[i];
+            }
         }
     }
 
     private IEnumerator FlashDamage()
     {
-        _renderer.material.color = _damageFlashColor;
-        yield return new WaitForSeconds(_flashDuration);
-        _renderer.material.color = _originalColor;
+        if (_renderers != null)
+        {
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = _damageFlashColor;
+            }
+            yield return new WaitForSeconds(_flashDuration);
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = _originalColors[i];
+            }
+        }
     }
 
     private void DestroyEnemy()

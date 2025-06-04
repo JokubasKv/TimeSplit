@@ -24,13 +24,25 @@ public abstract class RewindAbstract : MonoBehaviour
 
     public void TrackObjectActiveState()
     {
-        istrackingActiveState = true;
-        trackedActiveStates.Write(gameObject.activeSelf);
+        if (!istrackingActiveState)
+        {
+            istrackingActiveState = true;
+            RewindController.ActivateStateUpdateCall += InvokeTrackObjectActiveState;
+        }
+    }
+
+    private void InvokeTrackObjectActiveState()
+    {
+        if (istrackingActiveState && IsTracking)
+        {
+            trackedActiveStates.Write(gameObject.activeSelf);
+        }
     }
 
     public void RestoreObjectActiveState(float seconds)
     {
-        gameObject.SetActive(trackedActiveStates.GetValue(seconds));
+        var state = trackedActiveStates.GetValue(seconds);
+        gameObject.SetActive(state);
     }
 
     CircularArray<TransformValues> trackedTransformValues;

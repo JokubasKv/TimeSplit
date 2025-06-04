@@ -150,6 +150,7 @@ MonoBehaviour:
   staticPickupRotation: 1
   pickupRotation: {x: 1, y: 0, z: 0}
   throwDamage: 2
+  damageMethod: 1
   fadesWhenPickedUp: 0
 --- !u!114 &431645666781479423
 MonoBehaviour:
@@ -167,7 +168,7 @@ MonoBehaviour:
   bullet: {fileID: 4475448352148028863, guid: 27268a2951512a4408dec6e11217f595, type: 3}
   shootForce: 100
   timeBetweenShooting: 1
-  spread: 1
+  spread: 0
   bulletsLeft: 0
 --- !u!54 &-4680912214379955001
 Rigidbody:

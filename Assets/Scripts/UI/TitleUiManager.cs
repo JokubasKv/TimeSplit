@@ -23,6 +23,8 @@ public class TitleUiManager : MonoBehaviour
         loadingPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
 
+        Random.InitState(1);
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameScene");
 
         while (!asyncLoad.isDone)

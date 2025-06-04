@@ -100,20 +100,17 @@ public class DungeonMaker : MonoBehaviour
             Vector2Int bottomLeft = room.BottomLeftCorner;
             Vector2Int topRight = room.TopRightCorner;
 
-            // Determine the number of enemies to spawn based on room size  
             Vector2Int roomSize = new Vector2Int(topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
-            int enemyCount = Mathf.Max(1, Mathf.Clamp(roomSize.x * roomSize.y / 100, 0, 6)); // Adjust density as needed  
+            int enemyCount = Mathf.Max(1, Mathf.Clamp(roomSize.x * roomSize.y / 200, 0, 3));
 
             for (int i = 0; i < enemyCount; i++)
             {
-                // Randomly position the enemy within the room  
                 Vector3 randomPosition = new Vector3(
                     UnityEngine.Random.Range(bottomLeft.x + 1, topRight.x - 1),
                     0,
                     UnityEngine.Random.Range(bottomLeft.y + 1, topRight.y - 1)
                 );
 
-                // Randomly select an enemy prefab  
                 GameObject enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
                 GameObject enemyInstance = Instantiate(enemyPrefab, randomPosition + enemyPrefab.transform.position, Quaternion.identity, transform);
 
@@ -195,7 +192,7 @@ public class DungeonMaker : MonoBehaviour
 
     private void CreateRoomObjectsRandom(Vector2Int bottomLeft, Vector2Int topRight, Vector2Int roomSize)
     {
-        int objectCount = Mathf.Max(1, roomSize.x * roomSize.y / 20); // Adjust density as needed
+        int objectCount = Mathf.Max(1, roomSize.x * roomSize.y / 40);
         for (int i = 0; i < objectCount; i++)
         {
             Vector3 randomPosition = new Vector3(
@@ -210,8 +207,7 @@ public class DungeonMaker : MonoBehaviour
             Instantiate(randomPrefab, randomPosition + randomPrefab.transform.position, randomRotation, transform);
         }
 
-        // Random chance to create a weapon in the middle of the room
-        if (weaponPrefabs != null && weaponPrefabs.Count > 0 && UnityEngine.Random.value < 0.25f) // 25% chance
+        if (weaponPrefabs != null && weaponPrefabs.Count > 0 && UnityEngine.Random.value < 0.25f)
         {
             Vector3 roomMiddle = new Vector3(
                 (bottomLeft.x + topRight.x) / 2.0f,
@@ -415,7 +411,6 @@ public class DungeonMaker : MonoBehaviour
     }
     private void PlaceObjectNearWall(Vector2Int bottomLeft, Vector2Int topRight)
     {
-        // Helper function to check if a wall position is a door (corridor entrance), considering corridor width
         bool IsNearCorridor(Vector3Int pos, bool horizontal)
         {
             if (horizontal)
